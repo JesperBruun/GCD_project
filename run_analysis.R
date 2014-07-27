@@ -2,7 +2,7 @@
 #run_analysis.R 
 
 ### delete in final version ######################################
-setwd("C:/Users/Jesper/Getting-and-Cleaning-Data-Course-Project")
+setwd("//DISKSTATION/Undervisningsmateriale/undervisningsmateriale/Coursera/Coursera - Getting and Cleaning Data/quizer og løsningsforsøg/Getting-and-Cleaning-Data-Course-Project")
 ### delete in final version ######################################
 
 list.files("../UCI HAR Dataset")
@@ -36,7 +36,8 @@ activity_labels<-read.table("../UCI HAR Dataset/activity_labels.txt")
 
 # naming the coulumns for later use
 colnames(activity_labels)<-c("Activity_Id","Activity")
-activity_labels
+
+
 
 # naming the dataframes "Activity_Id" of the one coulumn in 
 # the test and training sets before merging
@@ -74,6 +75,9 @@ dataset<-merge(activity_labels,dataset)
 # the Activity_Id are removed because it is no longer needed.
 red_data <- cbind(dataset[,3:2],dataset[,grepl("(?=.*-mean\\(\\))|(?=.*-std\\(\\))", names(dataset), ignore.case=TRUE, perl=TRUE)])
 
+# Sort the dataset by Subject as described in Tidy Data, Hadley Wickham
+red_data<-red_data[order(red_data$Subject_Id),]
+
 head(names(red_data))
 names(red_data)
 dim(red_data)
@@ -90,6 +94,11 @@ dim(td)
 head(td)
 td[c(1,2,3),c(1,2,3,4,5)]
 
-# The tidy dataset is writen to a csv file "td.csv" via the function write.csv
-write.csv(td, "td.csv", row.names=FALSE)
+# The tidy dataset is writen to a txt file "td.txt" via the function write.table
+write.table(td, "td.txt", row.names=FALSE)
+
+rd<-read.table("td.txt",header=TRUE)
+head(rd)
+rd[c(1,2,3),c(1,2,3,4,5)]
+
 

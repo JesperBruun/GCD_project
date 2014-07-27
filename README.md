@@ -5,12 +5,14 @@ This readme file describes the R script run_analysis.R. The script process raw d
 read.table("td.txt",header=TRUE)
 ```
 The raw data for the project are dowloaded from this web adress:
--https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 A full description of the raw data is available at the site where the raw data can be downloaded from:
--http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
 The raw data consists of a test dataset, a train dataset and a common explanation and feature files.
+
+A Code Book descriping the variables is can be found in CodeBook.md.
 
 #Detail description of the script run_analysis.R
 This part describes the script in detail. General and principal explanations are provided for a block of R commands that are shown in a "code block". The description of each command are provided directly in the code block before each command.
@@ -130,3 +132,6 @@ The data are saved in a txt file in the working directory.
 # The tidy dataset is writen to a txt file "td.txt" via the function write.table
 write.table(td, "td.txt", row.names=FALSE)
 ```
+
+Further informatio of tidy data can be found in the paper Tidy Data, Hadley Wickham:
+http://vita.had.co.nz/papers/tidy-data.pdf

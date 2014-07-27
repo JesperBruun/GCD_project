@@ -1,84 +1,102 @@
 Title CodeBook.md
 ========================================================
+This documet is a codebook for the tidy dataset produced by run_analysis.R and stored in the text file td.txt.
 
-Study Design
-=================
+##Study Design
+The tidy dataset is obtained by processing a raw dataset that can be found at this web adress:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
-The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+The tidy dataset contains a header descriping the content of the columns. Then following rows contain means of selected features fetched from the raw data as descrioped in the README.md file. Each row represents one subject doing one of 6 activities. There are 30 subjects and 180 rows of data bedcause all subjects did all activities.
 
-Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+All features are normalized and bounded with [-1,1].
 
-Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+##Code Book
 
-These signals were used to estimate variables of the feature vector for each pattern:  
-'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+* SubjectId: Number telling which person did the test
+* Activity: Text of the kind og activity
 
-tBodyAcc-XYZ
-tGravityAcc-XYZ
-tBodyAccJerk-XYZ
-tBodyGyro-XYZ
-tBodyGyroJerk-XYZ
-tBodyAccMag
-tGravityAccMag
-tBodyAccJerkMag
-tBodyGyroMag
-tBodyGyroJerkMag
-fBodyAcc-XYZ
-fBodyAccJerk-XYZ
-fBodyGyro-XYZ
-fBodyAccMag
-fBodyAccJerkMag
-fBodyGyroMag
-fBodyGyroJerkMag
+Key for decoding the variable (feature) names
 
-The set of variables that were estimated from these signals are: 
+* Time: Time domain data
+* Freq: Frequency domain data. Cauculated from the time domain data via FFT.
+* Body: Body part of the original acceleration measurement
+* Gravity: Gravity part of the original acceleration measurement
+* Acc: Acceleration
+* Gyro: Gyroscope data
+* Jerk: Jerk 
+* Mag: Magnitude of signal relevant signal
+* Mean: Mean value
+* Std: Standard Deviation
+* XYZ: Direction in a coordination system. X, Y and Z is perpendicular to each other
 
-mean(): Mean value
-std(): Standard deviation
-mad(): Median absolute deviation 
-max(): Largest value in array
-min(): Smallest value in array
-sma(): Signal magnitude area
-energy(): Energy measure. Sum of the squares divided by the number of values. 
-iqr(): Interquartile range 
-entropy(): Signal entropy
-arCoeff(): Autorregresion coefficients with Burg order equal to 4
-correlation(): correlation coefficient between two signals
-maxInds(): index of the frequency component with largest magnitude
-meanFreq(): Weighted average of the frequency components to obtain a mean frequency
-skewness(): skewness of the frequency domain signal 
-kurtosis(): kurtosis of the frequency domain signal 
-bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
-angle(): Angle between to vectors.
 
-Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+###Features in time domain
+* TimeBodyAccMeanX: Time domain data; Body part of the original acceleration measurement; Acceleration; Mean value; X direction; 
+* TimeBodyAccMeanY: Time domain data; Body part of the original acceleration measurement; Acceleration; Mean value; Y direction; 
+* TimeBodyAccMeanZ: Time domain data; Body part of the original acceleration measurement; Acceleration; Mean value; Z direction
+* TimeBodyAccStdX: Time domain data; Body part of the original acceleration measurement; Acceleration; Standard Deviation; X direction; 
+* TimeBodyAccStdY: Time domain data; Body part of the original acceleration measurement; Acceleration; Standard Deviation; Y direction; 
+* TimeBodyAccStdZ: Time domain data; Body part of the original acceleration measurement; Acceleration; Standard Deviation; Z direction
+* TimeGravityAccMeanX: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Mean value; X direction; 
+* TimeGravityAccMeanY: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Mean value; Y direction; 
+* TimeGravityAccMeanZ: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Mean value; Z direction
+* TimeGravityAccStdX: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Standard Deviation; X direction; 
+* TimeGravityAccStdY: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Standard Deviation; Y direction; 
+* TimeGravityAccStdZ: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Standard Deviation; Z direction
+* TimeBodyAccJerkMeanX: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Mean value; X direction; 
+* TimeBodyAccJerkMeanY: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Mean value; Y direction; 
+* TimeBodyAccJerkMeanZ: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Mean value; Z direction
+* TimeBodyAccJerkStdX: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Standard Deviation; X direction; 
+* TimeBodyAccJerkStdY: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Standard Deviation; Y direction; 
+* TimeBodyAccJerkStdZ: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Standard Deviation; Z direction
+* TimeBodyGyroMeanX: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Mean value; X direction; 
+* TimeBodyGyroMeanY: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Mean value; Y direction; 
+* TimeBodyGyroMeanZ: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Mean value; Z direction
+* TimeBodyGyroStdX: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Standard Deviation; X direction; 
+* TimeBodyGyroStdY: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Standard Deviation; Y direction; 
+* TimeBodyGyroStdZ: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Standard Deviation; Z direction
+* TimeBodyGyroJerkMeanX: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Mean value; X direction; 
+* TimeBodyGyroJerkMeanY: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Mean value; Y direction; 
+* TimeBodyGyroJerkMeanZ: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Mean value; Z direction
+* TimeBodyGyroJerkStdX: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Standard Deviation; X direction; 
+* TimeBodyGyroJerkStdY: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Standard Deviation; Y direction; 
+* TimeBodyGyroJerkStdZ: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Standard Deviation; Z direction
+* TimeBodyAccMagMean: Time domain data; Body part of the original acceleration measurement; Acceleration; Magnitude of signal relevant signal; Mean value; 
+* TimeBodyAccMagStd: Time domain data; Body part of the original acceleration measurement; Acceleration; Magnitude of signal relevant signal; Standard Deviation; 
+* TimeGravityAccMagMean: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Magnitude of signal relevant signal; Mean value; 
+* TimeGravityAccMagStd: Time domain data; Gravity part of the original acceleration measurement; Acceleration; Magnitude of signal relevant signal; Standard Deviation; 
+* TimeBodyAccJerkMagMean: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Magnitude of signal relevant signal; Mean value; 
+* TimeBodyAccJerkMagStd: Time domain data; Body part of the original acceleration measurement; Acceleration; Jerk; Magnitude of signal relevant signal; Standard Deviation; 
+* TimeBodyGyroMagMean: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Magnitude of signal relevant signal; Mean value; 
+* TimeBodyGyroMagStd: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Magnitude of signal relevant signal; Standard Deviation; 
+* TimeBodyGyroJerkMagMean: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Magnitude of signal relevant signal; Mean value; 
+* TimeBodyGyroJerkMagStd: Time domain data; Body part of the original acceleration measurement; Gyroscope data; Jerk; Magnitude of signal relevant signal; Standard Deviation; 
 
-gravityMean
-tBodyAccMean
-tBodyAccJerkMean
-tBodyGyroMean
-tBodyGyroJerkMean
-
-The complete list of variables of each feature vector is available in 'features.txt'
-
-Code Book
-=================
-
-tBodyAcc-XYZ
-tGravityAcc-XYZ
-tBodyAccJerk-XYZ
-tBodyGyro-XYZ
-tBodyGyroJerk-XYZ
-tBodyAccMag
-tGravityAccMag
-tBodyAccJerkMag
-tBodyGyroMag
-tBodyGyroJerkMag
-fBodyAcc-XYZ
-fBodyAccJerk-XYZ
-fBodyGyro-XYZ
-fBodyAccMag
-fBodyAccJerkMag
-fBodyGyroMag
-fBodyGyroJerkMag
+###Features in frequency domain
+* FreqBodyAccMeanX: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Mean value; X direction; 
+* FreqBodyAccMeanY: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Mean value; Y direction; 
+* FreqBodyAccMeanZ: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Mean value; Z direction
+* FreqBodyAccStdX: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Standard Deviation; X direction; 
+* FreqBodyAccStdY: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Standard Deviation; Y direction; 
+* FreqBodyAccStdZ: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Standard Deviation; Z direction
+* FreqBodyAccJerkMeanX: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Mean value; X direction; 
+* FreqBodyAccJerkMeanY: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Mean value; Y direction; 
+* FreqBodyAccJerkMeanZ: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Mean value; Z direction
+* FreqBodyAccJerkStdX: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Standard Deviation; X direction; 
+* FreqBodyAccJerkStdY: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Standard Deviation; Y direction; 
+* FreqBodyAccJerkStdZ: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Standard Deviation; Z direction
+* FreqBodyGyroMeanX: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Mean value; X direction; 
+* FreqBodyGyroMeanY: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Mean value; Y direction; 
+* FreqBodyGyroMeanZ: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Mean value; Z direction
+* FreqBodyGyroStdX: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Standard Deviation; X direction; 
+* FreqBodyGyroStdY: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Standard Deviation; Y direction; 
+* FreqBodyGyroStdZ: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Standard Deviation; Z direction
+* FreqBodyAccMagMean: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Magnitude of signal relevant signal; Mean value; 
+* FreqBodyAccMagStd: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Magnitude of signal relevant signal; Standard Deviation; 
+* FreqBodyAccJerkMagMean: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Magnitude of signal relevant signal; Mean value; 
+* FreqBodyAccJerkMagStd: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Acceleration; Jerk; Magnitude of signal relevant signal; Standard Deviation; 
+* FreqBodyGyroMagMean: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Magnitude of signal relevant signal; Mean value; 
+* FreqBodyGyroMagStd: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Magnitude of signal relevant signal; Standard Deviation; 
+* FreqBodyGyroJerkMagMean: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Jerk; Magnitude of signal relevant signal; Mean value; 
+* FreqBodyGyroJerkMagStd: Frequency domain data. Cauculated from the time domain data via FFT.; Body part of the original acceleration measurement; Gyroscope data; Jerk; Magnitude of signal relevant signal; Standard Deviation; 
 

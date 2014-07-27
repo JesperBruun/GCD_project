@@ -6,7 +6,7 @@ This documet is a codebook for the tidy dataset produced by run_analysis.R and s
 The tidy dataset is obtained by processing a raw dataset that can be found at this web adress:
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
-The tidy dataset contains a header descriping the content of the columns. Then following rows contain means of selected features fetched from the raw data as descrioped in the README.md file. Each row represents one subject doing one of 6 activities. There are 30 subjects and 180 rows of data bedcause all subjects did all activities.
+The tidy dataset contains a header descriping the content of the columns. Then following rows contain means of selected features fetched from the raw data as descriped in the README.md file. Each row represents one subject doing one of 6 activities. There are 30 subjects and 180 rows of data bedcause all subjects did all activities.
 
 All features are normalized and bounded with [-1,1].
 

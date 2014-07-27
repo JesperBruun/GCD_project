@@ -1,12 +1,6 @@
 ## Getting and Cleaning Data Course Project
 #run_analysis.R 
 
-### delete in final version ######################################
-setwd("//DISKSTATION/Undervisningsmateriale/undervisningsmateriale/Coursera/Coursera - Getting and Cleaning Data/quizer og løsningsforsøg/Getting-and-Cleaning-Data-Course-Project")
-### delete in final version ######################################
-
-list.files("../UCI HAR Dataset")
-
 # reading training set
 x_train<-read.table("../UCI HAR Dataset/train/X_train.txt")
 
@@ -28,8 +22,6 @@ subject_test<-read.table("../UCI HAR Dataset/test/subject_test.txt")
 # reading list of all features
 features<-read.table("../UCI HAR Dataset/features.txt")
 
-features
-
 # "README.txt" : 'activity_labels.txt': Links the class labels with their activity name.
 # reading list that links the class labels with their activity name
 activity_labels<-read.table("../UCI HAR Dataset/activity_labels.txt")
@@ -37,14 +29,12 @@ activity_labels<-read.table("../UCI HAR Dataset/activity_labels.txt")
 # naming the coulumns for later use
 colnames(activity_labels)<-c("ActivityId","Activity")
 
-
-
-# naming the dataframes "Activity_Id" of the one coulumn in 
+# naming the dataframes "Activity_Id" of the one column in 
 # the test and training sets before merging
 colnames(y_test)<-c("ActivityId")
 colnames(y_train)<-c("ActivityId")
 
-# naming the dataframes "Subject_Id" of the one coulumn in 
+# naming the dataframes "Subject_Id" of the one column in 
 # the test and training sets before merging
 colnames(subject_test)<-c("SubjectId")
 colnames(subject_train)<-c("SubjectId")
@@ -60,38 +50,28 @@ train<-cbind(subject_train,y_train,x_train)
 # merging the test and traning sets via rbind
 dataset<-rbind(train,test)
 
-head(names(dataset))
-names(dataset)
-
 # Merging the activity_labels dataset with the dataset to match the activity id 
 # and the activity and add the activity as a column to the dataset
 dataset<-merge(activity_labels,dataset)
 
-
 # choose all features that are means or standard deviations ie. mean() or std()
 # I use this argument "(?=.*-mean\\(\\))|(?=.*-std\\(\\))" for grepl to filter out 
 # features of type "...meanFreq()"
-# the subject and activity coloumn are preserved and interchanged via cbind(dataset[,3:2],...
+# the subject and activity column are preserved and interchanged via cbind(dataset[,3:2],...
 # the Activity_Id are removed because it is no longer needed.
 red_data <- cbind(dataset[,3:2],dataset[,grepl("(?=.*-mean\\(\\))|(?=.*-std\\(\\))", names(dataset), ignore.case=TRUE, perl=TRUE)])
 
 # Sort the dataset by Subject as described in Tidy Data, Hadley Wickham
-red_data<-red_data[order(red_data$Subject_Id),]
+red_data<-red_data[order(red_data$SubjectId),]
 
-head(names(red_data))
-names(red_data)
-dim(red_data)
-red_data[c(1,2,3),c(1,2,3,4,5)]
-
-# Mean values of the coloumns 3-68 are found with the subject and activity coloumn 
+# Mean values of the columns 3-68 are found with the subject and activity column 
 # as a key - this is done via aggregate
-
 td <-aggregate(red_data[,3:68], by=list(red_data$SubjectId, red_data$Activity),FUN=mean, na.rm=TRUE)
 
-# The couloumn names of the tidy data set (td) for the subject and activity coloumn are copied from the reduced dataset red_data
+# The column names of the tidy data set (td) for the subject and activity column are copied from the reduced dataset red_data
 colnames(td)[1:2]<-colnames(red_data)[1:2]
 
-# The couloumn names of the tidy data set (td) are trimmed for the brackets via gsub
+# The column names of the tidy data set (td) are trimmed for the brackets via gsub
 names(td)<-gsub("*\\(\\)","",names(td))
 
 # The error in the feature list with bodybody instead of body are changes via gsub
@@ -108,19 +88,5 @@ names(td)<-gsub("'*\\-m","M",names(td))
 names(td)<-gsub("'*\\-s","S",names(td))
 names(td)<-gsub("'*\\-","",names(td))
 
-
-
-names(td)
-td[c(1,2,3),c(1,2,3,4,5)]
-
-dim(td)
-head(td)
-td[c(1,2,3),c(1,2,3,4,5)]
-
 # The tidy dataset is writen to a txt file "td.txt" via the function write.table
 write.table(td, "td.txt", row.names=FALSE)
-
-rd<-read.table("td.txt",header=TRUE)
-head(rd)
-rd[c(1,2,3),c(1,2,3,4,5)]
-

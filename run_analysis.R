@@ -35,19 +35,19 @@ features
 activity_labels<-read.table("../UCI HAR Dataset/activity_labels.txt")
 
 # naming the coulumns for later use
-colnames(activity_labels)<-c("Activity_Id","Activity")
+colnames(activity_labels)<-c("ActivityId","Activity")
 
 
 
 # naming the dataframes "Activity_Id" of the one coulumn in 
 # the test and training sets before merging
-colnames(y_test)<-c("Activity_Id")
-colnames(y_train)<-c("Activity_Id")
+colnames(y_test)<-c("ActivityId")
+colnames(y_train)<-c("ActivityId")
 
 # naming the dataframes "Subject_Id" of the one coulumn in 
 # the test and training sets before merging
-colnames(subject_test)<-c("Subject_Id")
-colnames(subject_train)<-c("Subject_Id")
+colnames(subject_test)<-c("SubjectId")
+colnames(subject_train)<-c("SubjectId")
 
 # naming the features in the dataframes of test and training sets
 colnames(x_test) <- features[,2]
@@ -85,10 +85,33 @@ red_data[c(1,2,3),c(1,2,3,4,5)]
 
 # Mean values of the coloumns 3-68 are found with the subject and activity coloumn 
 # as a key - this is done via aggregate
-td <-aggregate(red_data[,3:68], by=list(red_data$Subject_Id, red_data$Activity),FUN=mean, na.rm=TRUE)
+
+td <-aggregate(red_data[,3:68], by=list(red_data$SubjectId, red_data$Activity),FUN=mean, na.rm=TRUE)
 
 # The couloumn names of the tidy data set (td) for the subject and activity coloumn are copied from the reduced dataset red_data
 colnames(td)[1:2]<-colnames(red_data)[1:2]
+
+# The couloumn names of the tidy data set (td) are trimmed for the brackets via gsub
+names(td)<-gsub("*\\(\\)","",names(td))
+
+# The error in the feature list with bodybody instead of body are changes via gsub
+names(td)<-gsub("*BodyBody*","Body",names(td))
+
+# names of time domain type are renamed to begin with Time instead of t
+names(td)<-gsub("^t","Time",names(td))
+
+# names of frequency domain type are renamed to begin with Freq instead of f
+names(td)<-gsub("^f","Freq",names(td))
+
+# names with dash bare are renamed and the following word are put to begin with upper case letter
+names(td)<-gsub("'*\\-m","M",names(td))
+names(td)<-gsub("'*\\-s","S",names(td))
+names(td)<-gsub("'*\\-","",names(td))
+
+
+
+names(td)
+td[c(1,2,3),c(1,2,3,4,5)]
 
 dim(td)
 head(td)
@@ -100,5 +123,4 @@ write.table(td, "td.txt", row.names=FALSE)
 rd<-read.table("td.txt",header=TRUE)
 head(rd)
 rd[c(1,2,3),c(1,2,3,4,5)]
-
 

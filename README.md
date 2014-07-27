@@ -8,7 +8,8 @@ The raw data for the project are dowloaded from this web adress:
 -https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 A full description of the raw data is available at the site where the raw data can be downloaded from:
--http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+-http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
 The raw data consists of a test dataset, a train dataset and a common explanation and feature files.
 
 #Detail description of the script run_analysis.R
@@ -43,7 +44,7 @@ features<-read.table("../UCI HAR Dataset/features.txt")
 activity_labels<-read.table("../UCI HAR Dataset/activity_labels.txt")
 ```
 ##preparation for merging the data
-The raw data are divided into 8 parts. To be able to merge them the columns are named. The README file following the raw data gives the information og the content of the separaetd files.
+The raw data are divided into 8 parts (including the features). To be able to merge them the columns are named. The README file following the raw data gives the information og the content of the separaetd files.
 ```
 # naming the columns for later use
 colnames(activity_labels)<-c("ActivityId","Activity")
@@ -100,7 +101,7 @@ red_data<-red_data[order(red_data$SubjectId),]
 # as a key - this is done via aggregate
 td <-aggregate(red_data[,3:68], by=list(red_data$SubjectId, red_data$Activity),FUN=mean, na.rm=TRUE)
 ```
-##Remaning features
+##Renaming features
 The features are renamed for easier understanding. Easy abbreviations as acc for acceleration and std for standard deviation is kept and not changed. CamelCasing is used for all column names. Symbols like -,(,) are removed.
 ```
 # The column names of the tidy data set (td) for the subject and activity column are copied from the reduced dataset red_data
